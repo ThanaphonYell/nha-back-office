@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { V1Module } from './v1/v1.module';
 import { LoggerModule } from './logger/logger.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -25,6 +26,15 @@ import { LoggerModule } from './logger/logger.module';
         autoLoadEntities:
           configService.get<string>('DATABASE_AUTO_LOAD_ENTITY') === 'true',
         synchronize: configService.get<string>('DATABASE_AUTO_SYNC') === 'true',
+      }),
+    }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      global: true,
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET_KEY'),
+        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') || '1h' },
       }),
     }),
     V1Module,

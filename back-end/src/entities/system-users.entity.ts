@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { SystemProfile } from './system-profile.entity';
 
 @Entity()
 export class SystemUsers {
@@ -12,12 +14,15 @@ export class SystemUsers {
   id: number;
 
   @Column({ type: 'varchar', length: 255, unique: true })
+  uuid_account: string;
+
+  @Column({ type: 'varchar', length: 255, unique: true })
   username: string;
 
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
-  @Column({ type: 'timestamp with time zone' })
+  @Column({ type: 'timestamp with time zone'})
   last_login: string;
 
   @Column({ type: 'boolean', default: true })
@@ -34,4 +39,7 @@ export class SystemUsers {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updated_datetime: string;
+
+  // @OneToOne(() => SystemProfile, (profile) => profile.user)
+  // profile: SystemProfile;
 }
