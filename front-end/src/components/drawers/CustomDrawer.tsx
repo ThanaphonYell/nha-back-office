@@ -15,6 +15,7 @@ interface CustomDrawerProps {
   cancelText?: string;
   width?: number;
   submitDisabled?: boolean;
+  progress?: number; // เพิ่ม prop สำหรับ % ความคืบหน้า
 }
 
 export default function CustomDrawer({
@@ -27,6 +28,7 @@ export default function CustomDrawer({
   cancelText = 'ยกเลิก',
   width = 400,
   submitDisabled = false,
+  progress,
 }: CustomDrawerProps) {
   return (
     <Drawer
@@ -35,9 +37,17 @@ export default function CustomDrawer({
       onClose={onClose}
       open={open}
       width={width}
+      className="shadow-lg"
+      styles={{ body: { backgroundColor: '#f9fafb', padding: '24px' } }} 
     >
-      <div className="space-y-4">
+      <div className="space-y-6">
         {children}
+        {progress !== undefined && (
+          <div className="mt-4">
+            <progress value={progress} max={100} className="w-full h-2 rounded bg-indigo-100" />
+            <p className="text-sm text-gray-600 mt-1">{progress}%</p>
+          </div>
+        )}
         <div className="flex justify-end gap-2">
           <CustomButton type="secondary" onClick={onClose}>
             {cancelText}
@@ -45,7 +55,7 @@ export default function CustomDrawer({
           <CustomButton
             type="primary"
             onClick={onSubmit}
-            disabled={submitDisabled}
+            disabled={submitDisabled || progress !== undefined} // ปิดปุ่มขณะอัปโหลด
           >
             {submitText}
           </CustomButton>
