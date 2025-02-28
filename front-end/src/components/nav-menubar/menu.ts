@@ -21,25 +21,70 @@ export const menu: IMenuGroup[] = [
                 iconClass: 'bi bi-grid',
                 link: '/'
             },
+        ]
+    },
+    {
+        title: 'MENU',
+        menu: [
             {
-                label: 'Components',
-                iconClass: 'bi bi-menu-button-wide',
-                link: '/',
-                items: [
-                    {
-                        label: 'Alerts',
-                        link: '/'
-                    },
-                    {
-                        label: 'Accordion',
-                        link: '/'
-                    },
-                    {
-                        label: 'Badges',
-                        link: '/'
-                    },
-                ]
-            }
+                label: 'เครื่องประเมิน',
+                iconClass: 'bi bi-display',
+                link: '/'
+            },
+            {
+                label: 'จัดการแบบประเมิน',
+                iconClass: 'bi bi-check-square',
+                link: '/'
+            },
+            
+        ]
+    },
+    {
+        title: 'RESOURCE',
+        menu: [
+            {
+                label: 'หน่วยประเมิน (Object)',
+                iconClass: 'bi bi-person',
+                link: '/'
+            },
+            {
+                label: 'คลังภาพ',
+                iconClass: 'bi bi-images',
+                link: '/media-library'
+            },
+
+        ]
+    },
+    {
+        title: 'REPORT',
+        menu: [
+            {
+                label: 'Report',
+                iconClass: 'bi bi-check-square',
+                link: '/'
+            },
+            {
+                label: 'Transaction',
+                iconClass: 'bi bi-person',
+                link: '/'
+            },
+
+        ]
+    },
+    {
+        title: 'SETTING',
+        menu: [
+            {
+                label: 'Business',
+                iconClass: 'bi bi-bank',
+                link: '/'
+            },
+            {
+                label: 'จัดการผู้ใช้งาน',
+                iconClass: 'bi bi-person',
+                link: '/access-control'
+            },
+
         ]
     },
     {
@@ -50,7 +95,7 @@ export const menu: IMenuGroup[] = [
                 iconClass: 'bi bi-box-arrow-in-right',
                 link: '/login'
             },
-            
+
         ]
     }
 ];

@@ -11,6 +11,7 @@ import "../globals.css";
 //-- import components
 import Header from "@/components/headers/Header";
 import NavMenubar from "@/components/nav-menubar/NavMenubar";
+import { ConfigProvider } from "antd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#4f46e5',
+        },
+      }}
+    >
     <html lang="en">      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -49,5 +57,6 @@ export default function RootLayout({
         <Script src="./assets/js/main.js" />
       </body>
     </html>
+    </ConfigProvider>
   );
 }
