@@ -1,0 +1,16 @@
+meta {
+  name: upload
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{HOST}}media/upload
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  mdId: 1
+  ~file: @file()
+}

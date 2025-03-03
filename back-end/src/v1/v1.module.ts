@@ -6,6 +6,7 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ResponseInterceptor } from '../commons/interceptors/response.interceptor';
 import { OauthModule } from './oauth/oauth.module';
 import { ZodValidationPipe } from 'nestjs-zod';
+import { MediaModule } from './media/media.module';
 
 @Module({
   controllers: [V1Controller],
@@ -20,6 +21,6 @@ import { ZodValidationPipe } from 'nestjs-zod';
     },
     V1Service,
   ],
-  imports: [AuthenticationModule, OauthModule],
+  imports: [AuthenticationModule, OauthModule, MediaModule],
 })
 export class V1Module {}
