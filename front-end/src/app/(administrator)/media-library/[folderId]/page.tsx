@@ -10,7 +10,7 @@ import CardMain from '@/components/cards/CardMain';
 import { deleteImage, fetchFolderImages, Image, uploadImage } from '@/actions/media-library/imageLibrary';
 import ImageCard from '@/components/cards/CardImage';
 import Loading from '@/components/loading/Loading';
-import CustomButton from '@/components/buttons/CustomButton';
+import CustomPagination from '@/components/pagination/CustomPagination';
 
 const { Dragger } = Upload;
 
@@ -71,6 +71,10 @@ export default function FolderDetailPage() {
         }
     };
 
+    const handlePageChange = (page: number) => {
+        // setCurrentPage(page);
+      };
+
     if (loading) {
         return <Loading />;
     }
@@ -83,12 +87,12 @@ export default function FolderDetailPage() {
                 { label: 'รายละเอียดโฟลเดอร์' },
             ]}
         >
-            <CardContent title="รายละเอียดโฟลเดอร์">
+            <CardContent title="อัพโหลดรูปภาพ">
                 <div className="mb-6">
                     <Dragger
                         customRequest={({ file }) => handleUpload(file as File)}
-                        showUploadList={false} 
-                        multiple={true} 
+                        showUploadList={false}
+                        multiple={true}
                         accept="image/*"
                     >
                         <p className="ant-upload-drag-icon">
@@ -112,14 +116,20 @@ export default function FolderDetailPage() {
                         )}
                     </Dragger>
                 </div>
-            </CardContent>
-            <CardContent title="">
+                <h4 className="card-title">รายละเอียดโฟลเดอร์</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {images.map((image) => (
                         <ImageCard key={image.id} image={image} onDelete={handleDelete} />
                     ))}
                 </div>
+                <CustomPagination
+                    total={images.length}
+                    pageSize={1}
+                    current={1}
+                    onPageChange={handlePageChange}
+                />
             </CardContent>
+
         </CardMain>
     );
 }

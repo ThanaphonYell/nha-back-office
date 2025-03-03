@@ -1,6 +1,5 @@
 'use client';
 
-import '@ant-design/v5-patch-for-react-19'; 
 import { useState, useEffect } from 'react';
 import { Input } from 'antd';
 import CardContent from '@/components/cards/CardContent';
@@ -43,6 +42,16 @@ export default function ImageLibraryPage() {
         }
     };
 
+    const handleUpdateFolder = (updatedFolder: Folder) => {
+        setFolders((prev) =>
+            prev.map((folder) => (folder.id === updatedFolder.id ? updatedFolder : folder))
+        );
+    };
+
+    const handleDeleteFolder = (folderId: string) => {
+        setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
+    };
+
     const openDrawer = () => setDrawerVisible(true);
     const closeDrawer = () => {
         setNewFolderName('');
@@ -82,7 +91,12 @@ export default function ImageLibraryPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {folders.map((folder) => (
-                        <FolderCard key={folder.id} folder={folder} />
+                        <FolderCard
+                            key={folder.id}
+                            folder={folder}
+                            onUpdate={handleUpdateFolder}
+                            onDelete={handleDeleteFolder} // ส่ง callback เพื่อลบ
+                        />
                     ))}
                 </div>
             </CardContent>
